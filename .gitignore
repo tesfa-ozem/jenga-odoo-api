@@ -1,0 +1,9 @@
+.idea
+*.pyc
+venv
+app.db
+migrations
+.vscode/
+logs
+.env
+/.vs

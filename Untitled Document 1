@@ -1,0 +1,11 @@
+pg_dump -U tritel sacco_payment_gateway > dbexport.pgsql
+sacco_payment_gateway
+dbexport.pgsql
+
+scp tritel@136.244.96.154:dbexport.pgsql /home/tesfa/
+
+ssh tritel@136.244.96.154
+
+psql -U tesfa sacco_payment_gateway < dbexport.pgsql
+
+export DATABASE_URL="postgresql:///sacco_payment_gateway"
