@@ -7,7 +7,7 @@ import datetime
 import requests
 
 
-@mod.route('/creat_lead', methods=['POST'])
+@mod.route('/create-lead', methods=['POST'])
 def create_lead():
     """ Add a members bio data into the systeme """
 
