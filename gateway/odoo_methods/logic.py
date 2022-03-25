@@ -25,7 +25,8 @@ class Logic:
         self.server = xmlrpc.client.ServerProxy(
             '{}/xmlrpc/2/common'.format(URL))
         self.uid = self.server.authenticate(DB, USER, PASS, {})
-        self.models = xmlrpc.client.ServerProxy('{}/xmlrpc/2/object'.format(URL))
+        self.models = xmlrpc.client.ServerProxy(
+            '{}/xmlrpc/2/object'.format(URL))
 
     def __enter__(self):
         return self
@@ -44,7 +45,9 @@ class Logic:
             self.invoke(
                 'crm.lead', 'create', lead_details)
 
-            return "Ok"
+            resp = jsonify({"message": "new lead created"})
+            resp.status_code = 201
+            return resp
 
         except Exception as e:
             resp = jsonify({
