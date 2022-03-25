@@ -42,10 +42,10 @@ class Logic:
     # MEMBER
     def create_lead(self, lead_details):
         try:
-            tag = lead_details['course_applying_for']
-            if tag:
-                tag_id = self.invoke('crm.tag', 'create', {"name": tag})
-                lead_details['tag_ids'] = tag_id
+            # tag = lead_details['course_applying_for']
+            # if tag:
+            #     tag_id = self.invoke('crm.tag', 'create', {"name": tag})
+            #     lead_details['tag_ids'] = tag_id
 
             self.invoke(
                 'crm.lead', 'create', lead_details)
