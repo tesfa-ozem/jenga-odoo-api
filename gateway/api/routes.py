@@ -14,8 +14,8 @@ def create_lead():
     db = headers.get("db")
     user = headers.get("user")
     password = headers.get("password")
-    with Logic() as logic:
-        
+    with Logic(db=db, user=user, password=password) as logic:
+
         data = request.json
         response = logic.create_lead(data)
     return response
