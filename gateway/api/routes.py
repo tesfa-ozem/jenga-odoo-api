@@ -10,8 +10,12 @@ import requests
 @mod.route('/create-lead', methods=['POST'])
 def create_lead():
     """ Add a members bio data into the systeme """
-
+    headers = request.headers
+    db = headers.get("db")
+    user = headers.get("user")
+    password = headers.get("password")
     with Logic() as logic:
+        
         data = request.json
         response = logic.create_lead(data)
     return response

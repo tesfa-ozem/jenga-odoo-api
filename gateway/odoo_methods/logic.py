@@ -12,21 +12,19 @@ import itertools
 logging.basicConfig()
 var = sys.version
 
-URL = 'https://erp.jengaschool.com'
-DB = 'erp.jengaschool.com'
-USER = 'admin'
-PASS = 'admin'
-
 
 class Logic:
 
-    def __init__(self):
-
+    def __init__(self, db, user, password):
+        self.url = f'https://{db}'
+        self.db = db
+        self.user = user
+        self.password = password
         self.server = xmlrpc.client.ServerProxy(
-            '{}/xmlrpc/2/common'.format(URL))
-        self.uid = self.server.authenticate(DB, USER, PASS, {})
+            '{}/xmlrpc/2/common'.format(self.url))
+        self.uid = self.server.authenticate(db, user, password, {})
         self.models = xmlrpc.client.ServerProxy(
-            '{}/xmlrpc/2/object'.format(URL))
+            '{}/xmlrpc/2/object'.format(self.url))
 
     def __enter__(self):
         return self
@@ -36,15 +34,18 @@ class Logic:
 
     def invoke(self, model, method, *args):
         reponse = self.models.execute_kw(
-            DB, self.uid, PASS, model, method, [args])
+            self.db, self.uid, self.password, model, method, [args])
         return reponse
 
     # MEMBER
     def create_lead(self, lead_details):
         try:
-            # tag = lead_details['course_applying_for']
-            # if tag:
-            #     tag_id = self.invoke('crm.tag', 'create', {"name": tag})
+            # if 'tag' in lead_details:
+            #     self.invoke('crm.tag', 'search', [[['is_company', '=', True]]], {
+            #                 'offset': 10, 'limit': 5})
+            #     tag_id = self.invoke('crm.tag', 'create', {
+            #                          "name": lead_details['tag']})
+            #     del lead_details['tag']
             #     lead_details['tag_ids'] = tag_id
 
             self.invoke(
