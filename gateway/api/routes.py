@@ -11,10 +11,11 @@ import requests
 def create_lead():
     """ Add a members bio data into the systeme """
     headers = request.headers
+    url = headers.get("url")
     db = headers.get("db")
     user = headers.get("user")
     password = headers.get("password")
-    with Logic(db=db, user=user, password=password) as logic:
+    with Logic(url=url, db=db, user=user, password=password) as logic:
 
         data = request.json
         response = logic.create_lead(data)

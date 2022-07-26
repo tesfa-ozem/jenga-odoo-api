@@ -15,8 +15,8 @@ var = sys.version
 
 class Logic:
 
-    def __init__(self, db, user, password):
-        self.url = f'https://{db}'
+    def __init__(self,url, db, user, password):
+        self.url = url
         self.db = db
         self.user = user
         self.password = password
